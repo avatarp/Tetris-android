@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Tetris</string>
+    <string name="welcomeText">Witaj w mojej aplikacji!</string>
+    <string name="credits">Napisane przez Mateusza Siedleckiego.</string>
+    <string name="newGameTxt">Nowa Gra</string>
+    <string name="controlsTxt">Sterowanie</string>
+    <string name="exitTxt">Wyjście</string>
+</resources>
