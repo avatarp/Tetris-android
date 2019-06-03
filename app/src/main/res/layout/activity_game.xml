@@ -4,55 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_repeating">
+    tools:context=".gameActivity">
 
     <ImageButton
         android:layout_above="@id/buttonsBox"
         android:id="@+id/dropButton"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        app:srcCompat="@drawable/double_down_arrow"
-        android:scaleType="fitCenter" />
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/double_down_arrow" />
 
     <LinearLayout
         android:id="@+id/buttonsBox"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="4">
-
-        <ImageButton
-            android:id="@+id/turnLeftButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/turn_left"
-            android:scaleType="fitCenter"  />
 
         <ImageButton
             android:id="@+id/leftArrowButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/left_arrow"
-            android:scaleType="fitCenter"  />
+            app:srcCompat="@drawable/left_arrow" />
 
         <ImageButton
-            android:id="@+id/rightArrowButton"
+            android:id="@+id/turnLeftButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/right_arrow"
-            android:scaleType="fitCenter" />
+            app:srcCompat="@drawable/turn_left" />
 
         <ImageButton
             android:id="@+id/turnRightButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/turn_right"
-            android:scaleType="fitCenter"   />
+            app:srcCompat="@drawable/turn_right" />
+
+        <ImageButton
+            android:id="@+id/rightArrowButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/right_arrow" />
 
 
     </LinearLayout>
