@@ -3,9 +3,9 @@ package com.example.tetris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 vibe.vibrate(100);
-                Intent intent=new Intent(MainActivity.this, controls.class);
+                Intent intent=new Intent(MainActivity.this, Controls.class);
                 startActivity(intent);
             }
         });
