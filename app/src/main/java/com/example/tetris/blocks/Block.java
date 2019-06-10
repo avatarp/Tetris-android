@@ -1,4 +1,4 @@
-package blocks;
+package com.example.tetris.blocks;
 
 public abstract class Block {
     Boolean[][] position = new Boolean[4][4];

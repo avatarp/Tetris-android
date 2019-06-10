@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        
+
 
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override

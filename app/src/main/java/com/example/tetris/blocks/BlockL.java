@@ -1,4 +1,4 @@
-package blocks;
+package com.example.tetris.blocks;
 
 public class BlockL extends Block {
     @Override

@@ -1,4 +1,6 @@
-import blocks.Block;
+package com.example.tetris;
+
+import com.example.tetris.blocks.Block;
 
 public class Grid {
     private int GridHeight=20;
