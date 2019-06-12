@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
         getSupportActionBar().hide(); //hide the title bar
         setContentView(R.layout.activity_main);
+        Button newGameButton = (Button) findViewById(R.id.newGameButton);
         Button controlsButton = (Button) findViewById(R.id.controlsButton);
         Button exitButton = (Button) findViewById(R.id.exitButton);
 
@@ -59,6 +60,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 vibe.vibrate(100);
                 Intent intent=new Intent(MainActivity.this, Controls.class);
+                startActivity(intent);
+            }
+        });
+
+        newGameButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this, GameActivity.class);
                 startActivity(intent);
             }
         });

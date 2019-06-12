@@ -1,13 +1,32 @@
 package com.example.tetris.blocks;
 
 public abstract class Block {
-    Boolean[][] position = new Boolean[4][4];
+    Boolean[][] position;
     Byte color;
     public Byte coordX;
     public Byte coordY;
-    public Boolean[][] getPosition(){return position;}
-    public Byte getColor(){return color;}
+
+    public Boolean[][] getPosition() {
+        return position;
+    }
+
+    public Byte getColor() {
+        return color;
+    }
+
     public abstract void arrange();
+
+    Block() {
+        position = new Boolean[4][4];
+        coordY=0;
+        coordX=4;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                position[i][j] = false;
+            }
+        }
+    }
+
 
     public void rotateLeft() {
 
