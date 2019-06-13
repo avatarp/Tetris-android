@@ -53,7 +53,7 @@ public class Grid {
                         GameGrid[j][k]=GameGrid[j+1][k];
                     }
                 }
-                score++;
+                score=+10;
                 i--;
             }
         }

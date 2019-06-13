@@ -15,19 +15,18 @@ import java.util.Random;
 
 public class Engine extends Thread {
 
-private Block nextBlock;
-private Block currBlock;
+    public Block nextBlock;
+    public Block currBlock;
 int score;
-Grid well;
+public Grid well;
 long waitTime;
-boolean steeringTime;
+public Byte getPosY(){return currBlock.coordY;}
 
 public Engine(){
     generateNextBlock();
     score=0;
     well=new Grid();
-    waitTime=2000;
-    steeringTime=true;
+    waitTime=200;
 }
 
 private void generateNextBlock()
@@ -40,10 +39,10 @@ private void generateNextBlock()
         case 0:nextBlock=new BlockI(color);
         case 1:nextBlock=new BlockJ(color);
         case 2:nextBlock=new BlockL(color);
-        case 3:nextBlock=new BlockO(color);
+        case 3:nextBlock=new BlockZ(color);
         case 4:nextBlock=new BlockS(color);
         case 5:nextBlock=new BlockT(color);
-        case 6:nextBlock=new BlockZ(color);
+        case 6:nextBlock=new BlockO(color);
     }
     nextBlock.coordY=0;
     nextBlock.coordX=4;
@@ -62,9 +61,9 @@ private boolean isColliding()
          //   Log.d("debug","j:"+j.toString());
             if(tempPosition[i][j] && temp[y + i][x + j]>0)
             { return true; }
-            if(y+i>19||y+i<0)
+            if(y+i>20||y+i<0)
             { return true; }
-            if(x+j>9||x+j<0)
+            if(x+j>14||x+j<0)
             {return true;}
         }
     }
@@ -74,7 +73,7 @@ private boolean isColliding()
 }
 
 
-private boolean spawn()
+    public boolean spawn()
 {
     if(currBlock==null && nextBlock==null)
     {
@@ -95,7 +94,7 @@ private boolean spawn()
 
 }
 
-private boolean dropDown()
+    public boolean dropDown()
 {
     currBlock.coordY++;
     if(isColliding()){
@@ -145,8 +144,5 @@ public void moveRight(){
     currBlock.coordX++;
 }
 
-public void run(){
-    score = this.runLogic();
-}
 
 }
