@@ -26,7 +26,7 @@ public Engine(){
     generateNextBlock();
     score=0;
     well=new Grid();
-    waitTime=200;
+    waitTime = 500;
 }
 
 private void generateNextBlock()
@@ -36,13 +36,27 @@ private void generateNextBlock()
     Byte color = (byte) rand.nextInt(4);
     switch (n)
     {
-        case 0:nextBlock=new BlockI(color);
-        case 1:nextBlock=new BlockJ(color);
-        case 2:nextBlock=new BlockL(color);
-        case 3:nextBlock=new BlockZ(color);
-        case 4:nextBlock=new BlockS(color);
-        case 5:nextBlock=new BlockT(color);
-        case 6:nextBlock=new BlockO(color);
+        case 0:
+            nextBlock = new BlockI(color);
+            break;
+        case 1:
+            nextBlock = new BlockJ(color);
+            break;
+        case 2:
+            nextBlock = new BlockL(color);
+            break;
+        case 3:
+            nextBlock = new BlockZ(color);
+            break;
+        case 4:
+            nextBlock = new BlockS(color);
+            break;
+        case 5:
+            nextBlock = new BlockT(color);
+            break;
+        case 6:
+            nextBlock = new BlockO(color);
+            break;
     }
     nextBlock.coordY=0;
     nextBlock.coordX=4;
@@ -59,12 +73,22 @@ private boolean isColliding()
         for(Integer j =0;j<4;j++) {
        // Log.d("debug","i:"+i.toString());
          //   Log.d("debug","j:"+j.toString());
+
+            if (currBlock.coordY == 20 && (currBlock.getPosition()[0][0] || currBlock.getPosition()[0][1] || currBlock.getPosition()[0][2] || currBlock.getPosition()[0][3])) {
+                return true;
+            } else if (currBlock.coordY == 19 && (currBlock.getPosition()[1][0] || currBlock.getPosition()[1][1] || currBlock.getPosition()[1][2] || currBlock.getPosition()[1][3])) {
+                return true;
+            } else if (currBlock.coordY == 18 && (currBlock.getPosition()[2][0] || currBlock.getPosition()[2][1] || currBlock.getPosition()[2][2] || currBlock.getPosition()[2][3])) {
+                return true;
+            } else if (currBlock.coordY == 17 && (currBlock.getPosition()[3][0] || currBlock.getPosition()[3][1] || currBlock.getPosition()[3][2] || currBlock.getPosition()[3][3])) {
+                return true;
+            }
+
+
             if(tempPosition[i][j] && temp[y + i][x + j]>0)
             { return true; }
-            if(y+i>20||y+i<0)
-            { return true; }
-            if(x+j>14||x+j<0)
-            {return true;}
+
+
         }
     }
 
@@ -136,12 +160,36 @@ public int runLogic()
    }
        return score;
 }
-//todo collision detection for moving left/right
+
 public void moveLeft(){
-    currBlock.coordX--;
+    boolean movePossible = true;
+    if (currBlock.coordX == 0 && (currBlock.getPosition()[0][0] || currBlock.getPosition()[1][0] || currBlock.getPosition()[2][0] || currBlock.getPosition()[3][0])) {
+        movePossible = false;
+    } else if (currBlock.coordX == -1 && (currBlock.getPosition()[0][1] || currBlock.getPosition()[1][1] || currBlock.getPosition()[2][1] || currBlock.getPosition()[3][1])) {
+        movePossible = false;
+    } else if (currBlock.coordX == -2 && (currBlock.getPosition()[0][2] || currBlock.getPosition()[1][2] || currBlock.getPosition()[2][2] || currBlock.getPosition()[3][2])) {
+        movePossible = false;
+    } else if (currBlock.coordX == -3 && (currBlock.getPosition()[0][3] || currBlock.getPosition()[1][3] || currBlock.getPosition()[2][3] || currBlock.getPosition()[3][3])) {
+        movePossible = false;
+    }
+    if (movePossible) {
+        currBlock.coordX--;
+    }
 }
 public void moveRight(){
-    currBlock.coordX++;
+    boolean movePossible = true;
+    if (currBlock.coordX == 6 && (currBlock.getPosition()[0][3] || currBlock.getPosition()[1][3] || currBlock.getPosition()[2][3] || currBlock.getPosition()[3][3])) {
+        movePossible = false;
+    } else if (currBlock.coordX == 7 && (currBlock.getPosition()[0][2] || currBlock.getPosition()[1][2] || currBlock.getPosition()[2][2] || currBlock.getPosition()[3][2])) {
+        movePossible = false;
+    } else if (currBlock.coordX == 8 && (currBlock.getPosition()[0][1] || currBlock.getPosition()[1][1] || currBlock.getPosition()[2][1] || currBlock.getPosition()[3][1])) {
+        movePossible = false;
+    } else if (currBlock.coordX == 9 && (currBlock.getPosition()[0][0] || currBlock.getPosition()[1][0] || currBlock.getPosition()[2][0] || currBlock.getPosition()[3][0])) {
+        movePossible = false;
+    }
+    if (movePossible) {
+        currBlock.coordX++;
+    }
 }
 
 

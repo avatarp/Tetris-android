@@ -1,5 +1,7 @@
 package com.example.tetris;
 
+import android.util.Log;
+
 import com.example.tetris.blocks.Block;
 
 public class Grid {
@@ -18,10 +20,18 @@ public class Grid {
                 }
             }
     }
-    public void addBlock(Block newBlock)
+
+    //todo fix blocks not alvays being added to grid
+    void addBlock(Block newBlock)
     {
         int y=newBlock.coordY;
         int x=newBlock.coordX;
+        Integer XX = x;
+        Integer YY = y;
+
+        Log.d("debug", "dropdown is true");
+        Log.d("debug", "add block currposY:" + YY.toString());
+        Log.d("debug", "add block currposX:" + XX.toString());
         for(int i=0;i<4;i++){
             for(int j =0;j<4;j++) {
                if(newBlock.getPosition()[i][j]){
@@ -36,28 +46,31 @@ public class Grid {
 
     public Byte updateGrid()
     {
-        Byte score=0;
-        for(int i=0;i<GridHeight;i++) {
+        for (int i = 0; i < GridHeight; i++) {
 
             boolean lvlClear = true;
 
             for (int j = 0; j < GridWidth; j++) {
-                if (GameGrid[i][j] < 1) {
+                if (GameGrid[i][j] == 0) {
                     lvlClear = false;
                 }
             }
 
-            if(lvlClear) {
-                for (int j=i;j<GridHeight-1;j++) {
+            if (lvlClear) {
+                Log.d("debug", "lvlClear is true");
+
+                for (int j = GridHeight - 1; j > 1; j--) {
                     for (int k = 0; k < GridWidth; k++) {
-                        GameGrid[j][k]=GameGrid[j+1][k];
+                        GameGrid[j][k] = GameGrid[j - 1][k];
                     }
                 }
-                score=+10;
-                i--;
+                return 10;
+
             }
-        }
-        return score;
+            }
+
+
+        return 0;
     }
 
 }

@@ -21,4 +21,12 @@ public class BlockO extends Block {
         coordY=0;
         coordX=4;
     }
+
+    @Override
+    public void rotateLeft() {
+    }
+
+    @Override
+    public void rotateRight() {
+    }
 }
