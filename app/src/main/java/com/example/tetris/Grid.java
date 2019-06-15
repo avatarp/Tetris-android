@@ -44,8 +44,9 @@ public class Grid {
         }
     }
 
-    public Byte updateGrid()
+    public Integer updateGrid()
     {
+        int score = 0;
         for (int i = 0; i < GridHeight; i++) {
 
             boolean lvlClear = true;
@@ -59,18 +60,20 @@ public class Grid {
             if (lvlClear) {
                 Log.d("debug", "lvlClear is true");
 
-                for (int j = GridHeight - 1; j > 1; j--) {
+                for (int j = i; j > 1; j--) {
                     for (int k = 0; k < GridWidth; k++) {
                         GameGrid[j][k] = GameGrid[j - 1][k];
+
                     }
                 }
-                return 10;
+                i--;
+                score += 10;
 
             }
             }
 
 
-        return 0;
+        return score;
     }
 
 }

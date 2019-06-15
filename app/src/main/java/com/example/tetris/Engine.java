@@ -33,7 +33,8 @@ private void generateNextBlock()
 {
     Random rand=new Random();
     int n = rand.nextInt(7);
-    Byte color = (byte) rand.nextInt(4);
+    Byte color = (byte) rand.nextInt(3);
+    color++;
     switch (n)
     {
         case 0:
@@ -62,7 +63,7 @@ private void generateNextBlock()
     nextBlock.coordX=4;
 }
 
-private boolean isColliding()
+    public boolean isColliding()
 {
 
     int y=currBlock.coordY;

@@ -51,8 +51,21 @@ public class GameActivity extends AppCompatActivity {
 
                 Paint white=new Paint();
                 white.setColor(Color.WHITE);
-                white.setStrokeWidth(5);
-                white.setStyle(Paint.Style.STROKE);
+                white.setStyle(Paint.Style.FILL);
+                Paint red = new Paint();
+                red.setColor(Color.RED);
+                red.setStyle(Paint.Style.FILL);
+                Paint green = new Paint();
+                green.setColor(Color.GREEN);
+                green.setStyle(Paint.Style.FILL);
+                Paint blue = new Paint();
+                blue.setColor(Color.BLUE);
+                blue.setStyle(Paint.Style.FILL);
+                Paint color = white;
+                Paint black = new Paint();
+                black.setColor(Color.BLACK);
+                black.setStyle(Paint.Style.STROKE);
+                black.setStrokeWidth(5);
 
                 gameCanvas.setBitmap(gameMap);
                 nextBlockCanvas.setBitmap(nextBlockMap);
@@ -74,16 +87,41 @@ public class GameActivity extends AppCompatActivity {
                 Log.e("debug","BWidth:"+h.toString());*/
                 for(int i=0;i<20;i++)
                 {
-                    for(int j=0;j<10;j++)
-                    {
+                    for (int j = 0; j < 10; j++) {
+                        if (game.well.getGameGrid()[i][j] == 1) {
+                            color = red;
+                        }
+                        if (game.well.getGameGrid()[i][j] == 2) {
+                            color = green;
+                        }
+                        if (game.well.getGameGrid()[i][j] == 3) {
+                            color = blue;
+                        }
+
                         if(game.well.getGameGrid()[i][j]>0)
-                            gameCanvas.drawRect(j * blockWidth, i * blockHeight, j * blockWidth + blockWidth, i * blockHeight + blockHeight, white);
-                        if(game.currBlock.coordX==j && game.currBlock.coordY==i)
-                        { for(int k=0;k<4;k++)
+                            gameCanvas.drawRect(j * blockWidth, i * blockHeight, j * blockWidth + blockWidth, i * blockHeight + blockHeight, color);
+                        gameCanvas.drawRect(j * blockWidth, i * blockHeight, j * blockWidth + blockWidth, i * blockHeight + blockHeight, black);
+                        if(game.currBlock.coordX==j && game.currBlock.coordY==i) {
+                            for (int k = 0; k < 4; k++)
                             {
                                 for(int l=0;l<4;l++) {
-                                    if (game.currBlock.getPosition()[l][k])
-                                        gameCanvas.drawRect(j * blockWidth + k * blockWidth, i * blockHeight + l * blockHeight, j * blockWidth + blockWidth + k * blockWidth, i * blockHeight + blockHeight + l * blockHeight, white);
+                                    if (game.currBlock.getPosition()[l][k]) {
+                                        if (game.currBlock.getColor() == 1) {
+                                            color = red;
+                                        }
+                                        if (game.currBlock.getColor() == 2) {
+                                            color = green;
+                                        }
+                                        if (game.currBlock.getColor() == 3) {
+                                            color = blue;
+                                        }
+
+                                        Log.e("debug", "COLOR=" + game.currBlock.getColor().toString());
+                                        gameCanvas.drawRect(j * blockWidth + k * blockWidth, i * blockHeight + l * blockHeight, j * blockWidth + blockWidth + k * blockWidth, i * blockHeight + blockHeight + l * blockHeight, color);
+                                        gameCanvas.drawRect(j * blockWidth + k * blockWidth, i * blockHeight + l * blockHeight, j * blockWidth + blockWidth + k * blockWidth, i * blockHeight + blockHeight + l * blockHeight, black);
+
+                                    }
+
                                 }
                             }
                         }
@@ -93,8 +131,20 @@ public class GameActivity extends AppCompatActivity {
 
                 for (int k = 0; k < 4; k++) {
                     for (int l = 0; l < 4; l++) {
-                        if (game.nextBlock.getPosition()[l][k])
-                            nextBlockCanvas.drawRect(k * blockWidth, l * blockHeight, blockWidth + k * blockWidth, blockHeight + l * blockHeight, white);
+                        if (game.nextBlock.getPosition()[l][k]) {
+
+                            if (game.nextBlock.getColor() == 1) {
+                                color = red;
+                            }
+                            if (game.nextBlock.getColor() == 2) {
+                                color = green;
+                            }
+                            if (game.nextBlock.getColor() == 3) {
+                                color = blue;
+                            }
+                            nextBlockCanvas.drawRect(k * blockWidth, l * blockHeight, blockWidth + k * blockWidth, blockHeight + l * blockHeight, color);
+                            nextBlockCanvas.drawRect(k * blockWidth, l * blockHeight, blockWidth + k * blockWidth, blockHeight + l * blockHeight, black);
+                        }
                     }
                 }
                 nextBlockView.setBackground(new BitmapDrawable(nextBlockMap));
@@ -159,6 +209,9 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 game.moveRight();
+                if (game.isColliding()) {
+                    game.moveLeft();
+                }
                 runOnUiThread(updateUI);
                 //GameActivity.this.notify();
             }
@@ -170,6 +223,9 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 game.moveLeft();
+                if (game.isColliding()) {
+                    game.moveRight();
+                }
                 runOnUiThread(updateUI);
                 //GameActivity.this.notify();
             }
@@ -180,6 +236,9 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 game.currBlock.rotateLeft();
+                if (game.isColliding()) {
+                    game.currBlock.rotateRight();
+                }
                 runOnUiThread(updateUI);
             }
 
@@ -189,6 +248,9 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 game.currBlock.rotateRight();
+                if (game.isColliding()) {
+                    game.currBlock.rotateLeft();
+                }
                 runOnUiThread(updateUI);
                 //GameActivity.this.notify();
             }
