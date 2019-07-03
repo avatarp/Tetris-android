@@ -17,7 +17,7 @@ public class Engine extends Thread {
 
     public Block nextBlock;
     public Block currBlock;
-int score;
+    Integer score;
 public Grid well;
 long waitTime;
 public Byte getPosY(){return currBlock.coordY;}
@@ -26,7 +26,7 @@ public Engine(){
     generateNextBlock();
     score=0;
     well=new Grid();
-    waitTime = 500;
+    waitTime = 1000;
 }
 
 private void generateNextBlock()
@@ -155,7 +155,11 @@ public int runLogic()
         well.addBlock(currBlock);
         totalBlocks++;
         Log.d("debug","Blocks:"+totalBlocks.toString());
-        score+=well.updateGrid();
+        Integer addedScore = well.updateGrid();
+        score += addedScore;
+        if (waitTime > 100) {
+            waitTime -= addedScore;
+        }
 
     }
    }

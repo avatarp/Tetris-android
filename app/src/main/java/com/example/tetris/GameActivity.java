@@ -193,18 +193,6 @@ public class GameActivity extends AppCompatActivity {
 
 
 
-        leftArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                game.moveLeft();
-                runOnUiThread(updateUI);
-                //GameActivity.this.notify();
-            }
-
-            });
-
-
         rightArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
