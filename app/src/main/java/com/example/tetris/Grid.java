@@ -1,13 +1,12 @@
 package com.example.tetris;
 
-import android.util.Log;
-
 import com.example.tetris.blocks.Block;
 
 public class Grid {
     private int GridHeight;
     private int GridWidth;
-    private Byte GameGrid[][];
+    private Byte[][] GameGrid;
+
     public Byte[][] getGameGrid() { return GameGrid; }
 
     Grid(){
@@ -21,17 +20,11 @@ public class Grid {
             }
     }
 
-    //todo fix blocks not alvays being added to grid
     void addBlock(Block newBlock)
     {
         int y=newBlock.coordY;
         int x=newBlock.coordX;
-        Integer XX = x;
-        Integer YY = y;
 
-        Log.d("debug", "dropdown is true");
-        Log.d("debug", "add block currposY:" + YY.toString());
-        Log.d("debug", "add block currposX:" + XX.toString());
         for(int i=0;i<4;i++){
             for(int j =0;j<4;j++) {
                if(newBlock.getPosition()[i][j]){
@@ -58,7 +51,6 @@ public class Grid {
             }
 
             if (lvlClear) {
-                Log.d("debug", "lvlClear is true");
 
                 for (int j = i; j > 1; j--) {
                     for (int k = 0; k < GridWidth; k++) {

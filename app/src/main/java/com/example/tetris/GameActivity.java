@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -28,25 +27,26 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
 
-        ImageButton leftArrow = (ImageButton) findViewById(R.id.leftArrowButton);
-        ImageButton rightArrow = (ImageButton) findViewById(R.id.rightArrowButton);
-        ImageButton downArrow = (ImageButton) findViewById(R.id.dropButton);
-        ImageButton rotateLeftKey = (ImageButton) findViewById(R.id.turnLeftButton);
-        ImageButton rotateRightKey = (ImageButton) findViewById(R.id.turnRightButton);
+        ImageButton leftArrow = findViewById(R.id.leftArrowButton);
+        ImageButton rightArrow = findViewById(R.id.rightArrowButton);
+        ImageButton downArrow = findViewById(R.id.dropButton);
+        ImageButton rotateLeftKey = findViewById(R.id.turnLeftButton);
+        ImageButton rotateRightKey = findViewById(R.id.turnRightButton);
+
         final Engine game=new Engine();
 
         final Runnable updateUI =new Runnable() {
 
             @Override
             public void run() {
-                final TextView scoreValue=(TextView) findViewById(R.id.scoreValueText);
-                final View gameView=(View) findViewById(R.id.GameSideView);
-                final View nextBlockView = (View) findViewById(R.id.nextBlockView);
-                String text;
+                final TextView scoreValue = findViewById(R.id.scoreValueText);
+                final View gameView = findViewById(R.id.GameSideView);
+                final View nextBlockView = findViewById(R.id.nextBlockView);
                 Bitmap gameMap=Bitmap.createBitmap(gameView.getWidth(),gameView.getHeight(), Bitmap.Config.RGB_565);
                 Canvas gameCanvas = new Canvas();
 
-                Bitmap nextBlockMap = Bitmap.createBitmap(nextBlockView.getWidth(), nextBlockView.getHeight(), Bitmap.Config.RGB_565);
+                Bitmap nextBlockMap = Bitmap.createBitmap(nextBlockView.getWidth(), nextBlockView.getHeight(), Bitmap.Config.ARGB_4444);
+
                 Canvas nextBlockCanvas = new Canvas();
 
                 Paint white=new Paint();
@@ -63,6 +63,7 @@ public class GameActivity extends AppCompatActivity {
                 blue.setStyle(Paint.Style.FILL);
                 Paint color = white;
                 Paint black = new Paint();
+
                 black.setColor(Color.BLACK);
                 black.setStyle(Paint.Style.STROKE);
                 black.setStrokeWidth(5);
@@ -71,20 +72,11 @@ public class GameActivity extends AppCompatActivity {
                 nextBlockCanvas.setBitmap(nextBlockMap);
 
 
-
                 float bitmapWidth=gameView.getWidth();
                 float bitmapHeight=gameView.getHeight();
                 float blockHeight=bitmapHeight/20;
                 float blockWidth=bitmapWidth/10;
-                /*Float e=bitmapHeight;
-                Float f=bitmapWidth;
-                Float g=blockHeight;
-                Float h=blockWidth;
 
-                Log.e("debug","Height:"+e.toString());
-                Log.e("debug","Width:"+f.toString());
-                Log.e("debug","BHeight:"+g.toString());
-                Log.e("debug","BWidth:"+h.toString());*/
                 for(int i=0;i<20;i++)
                 {
                     for (int j = 0; j < 10; j++) {
@@ -116,7 +108,6 @@ public class GameActivity extends AppCompatActivity {
                                             color = blue;
                                         }
 
-                                        Log.e("debug", "COLOR=" + game.currBlock.getColor().toString());
                                         gameCanvas.drawRect(j * blockWidth + k * blockWidth, i * blockHeight + l * blockHeight, j * blockWidth + blockWidth + k * blockWidth, i * blockHeight + blockHeight + l * blockHeight, color);
                                         gameCanvas.drawRect(j * blockWidth + k * blockWidth, i * blockHeight + l * blockHeight, j * blockWidth + blockWidth + k * blockWidth, i * blockHeight + blockHeight + l * blockHeight, black);
 
@@ -149,7 +140,7 @@ public class GameActivity extends AppCompatActivity {
                 }
                 nextBlockView.setBackground(new BitmapDrawable(nextBlockMap));
                 gameView.setBackground(new BitmapDrawable(gameMap));
-                text=valueOf(game.score);
+                String text = valueOf(game.score);
                 scoreValue.setText(text);
 
             }
@@ -161,17 +152,14 @@ public class GameActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                game.score++;
-                Integer totalBlocks=0;
+
                 synchronized (this){
+                    Integer totalBlocks = 0;
+                    Integer newScore = 0;
                     while (game.spawn())
                     {
-                        Log.d("debug","Spawn is true");
                         while( game.dropDown())
                         {
-                            Log.d("debug","dropdown is true");
-                            Log.d("debug","currposY:"+ game.currBlock.coordY.toString());
-                            Log.d("debug","currposX:"+ game.currBlock.coordX.toString());
                             runOnUiThread(updateUI);
                             try {
                                 wait( game.waitTime);
@@ -179,12 +167,14 @@ public class GameActivity extends AppCompatActivity {
 
                             }
                         }
-                        Log.d("debug","add block");
                         game.score++;
                         game.well.addBlock( game.currBlock);
                         totalBlocks++;
-                        Log.d("debug","Blocks:"+totalBlocks.toString());
-                        game.score+= game.well.updateGrid();
+                        newScore = game.well.updateGrid();
+                        game.score += newScore;
+                        if (game.waitTime > 100) {
+                            game.waitTime -= newScore;
+                        }
 
                     }
                 }
@@ -201,7 +191,6 @@ public class GameActivity extends AppCompatActivity {
                     game.moveLeft();
                 }
                 runOnUiThread(updateUI);
-                //GameActivity.this.notify();
             }
 
         });
@@ -215,7 +204,6 @@ public class GameActivity extends AppCompatActivity {
                     game.moveRight();
                 }
                 runOnUiThread(updateUI);
-                //GameActivity.this.notify();
             }
 
         });
@@ -240,7 +228,7 @@ public class GameActivity extends AppCompatActivity {
                     game.currBlock.rotateLeft();
                 }
                 runOnUiThread(updateUI);
-                //GameActivity.this.notify();
+
             }
 
         });
@@ -255,7 +243,7 @@ public class GameActivity extends AppCompatActivity {
 
         });
 
-
+        //GameActivity.this.notify();?
     }
 
     @Override
@@ -265,8 +253,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
-
-    }
+}
 
 
 

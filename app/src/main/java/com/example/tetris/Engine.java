@@ -1,7 +1,5 @@
 package com.example.tetris;
 
-import android.util.Log;
-
 import com.example.tetris.blocks.Block;
 import com.example.tetris.blocks.BlockI;
 import com.example.tetris.blocks.BlockJ;
@@ -18,9 +16,8 @@ public class Engine extends Thread {
     public Block nextBlock;
     public Block currBlock;
     Integer score;
-public Grid well;
-long waitTime;
-public Byte getPosY(){return currBlock.coordY;}
+    public Grid well;
+    long waitTime;
 
 public Engine(){
     generateNextBlock();
@@ -72,8 +69,6 @@ private void generateNextBlock()
     Boolean[][] tempPosition=currBlock.getPosition();
     for(Integer i=0;i<4;i++){
         for(Integer j =0;j<4;j++) {
-       // Log.d("debug","i:"+i.toString());
-         //   Log.d("debug","j:"+j.toString());
 
             if (currBlock.coordY == 20 && (currBlock.getPosition()[0][0] || currBlock.getPosition()[0][1] || currBlock.getPosition()[0][2] || currBlock.getPosition()[0][3])) {
                 return true;
@@ -130,42 +125,36 @@ private void generateNextBlock()
     return true;
 }
 
-
-public int runLogic()
-{
-   score++;
-   Integer totalBlocks=0;
-   synchronized (this){
-    while (spawn())
+    /*todo remove or reimplement runLogic()
+    public int runLogic()
     {
-        Log.d("debug","Spawn is true");
-        while(dropDown())
+       score++;
+       Integer totalBlocks=0;
+       synchronized (this){
+        while (spawn())
         {
-            Log.d("debug","dropdown is true");
-            Log.d("debug","currposY:"+currBlock.coordY.toString());
-            Log.d("debug","currposX:"+currBlock.coordX.toString());
 
-            try {
-                wait(waitTime);
-            } catch (InterruptedException e) {
-
+            while(dropDown())
+            {
+                try {
+                    wait(waitTime);
+                } catch (InterruptedException e) { }
             }
-        }
-        Log.d("debug","add block");
-        well.addBlock(currBlock);
-        totalBlocks++;
-        Log.d("debug","Blocks:"+totalBlocks.toString());
-        Integer addedScore = well.updateGrid();
-        score += addedScore;
-        if (waitTime > 100) {
-            waitTime -= addedScore;
-        }
 
+            well.addBlock(currBlock);
+            totalBlocks++;
+
+            Integer addedScore = well.updateGrid();
+            score += addedScore;
+            if (waitTime > 100) {
+                waitTime -= addedScore;
+            }
+
+        }
+       }
+           return score;
     }
-   }
-       return score;
-}
-
+    */
 public void moveLeft(){
     boolean movePossible = true;
     if (currBlock.coordX == 0 && (currBlock.getPosition()[0][0] || currBlock.getPosition()[1][0] || currBlock.getPosition()[2][0] || currBlock.getPosition()[3][0])) {
