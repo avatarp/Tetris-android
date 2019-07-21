@@ -29,8 +29,7 @@ public class Grid {
             for(int j =0;j<4;j++) {
                if(newBlock.getPosition()[i][j]){
 
-                   GameGrid[y + i][x + j] =
-                           newBlock.getColor();
+                   GameGrid[y + i][x + j] = newBlock.getColor();
                }
             }
 
@@ -52,17 +51,20 @@ public class Grid {
 
             if (lvlClear) {
 
-                for (int j = i; j > 1; j--) {
+                for (int j = i; j > 0; j--) {
                     for (int k = 0; k < GridWidth; k++) {
                         GameGrid[j][k] = GameGrid[j - 1][k];
 
                     }
                 }
+                for (int j = 0; j < GridWidth; j++) {
+                    GameGrid[0][j] = 0;
+                }
                 i--;
                 score += 10;
 
             }
-            }
+        }
 
 
         return score;

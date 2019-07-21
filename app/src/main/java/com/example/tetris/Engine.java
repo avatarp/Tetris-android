@@ -80,10 +80,8 @@ private void generateNextBlock()
                 return true;
             }
 
-
             if(tempPosition[i][j] && temp[y + i][x + j]>0)
             { return true; }
-
 
         }
     }
@@ -125,37 +123,42 @@ private void generateNextBlock()
     return true;
 }
 
-    /*todo remove or reimplement runLogic()
-    public int runLogic()
-    {
-       score++;
-       Integer totalBlocks=0;
-       synchronized (this){
-        while (spawn())
-        {
-
-            while(dropDown())
-            {
+    public void runLogic(GameActivity gameActivityObj) {
+        synchronized (this) {
+            Integer totalBlocks = 0;
+            Integer newScore = 0;
+            while (spawn()) {
+                gameActivityObj.triggerUIupdate();
                 try {
                     wait(waitTime);
-                } catch (InterruptedException e) { }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                while (dropDown()) {
+                    gameActivityObj.triggerUIupdate();
+                try {
+                    wait(waitTime);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
-
+                score++;
             well.addBlock(currBlock);
             totalBlocks++;
-
-            Integer addedScore = well.updateGrid();
-            score += addedScore;
+                newScore = well.updateGrid();
+                score += newScore;
             if (waitTime > 100) {
-                waitTime -= addedScore;
+                waitTime -= newScore;
             }
+                if (waitTime < 100) {
+                    waitTime = 100;
+                }
 
         }
-       }
-           return score;
+        }
     }
-    */
-public void moveLeft(){
+
+    public void moveLeft() {
     boolean movePossible = true;
     if (currBlock.coordX == 0 && (currBlock.getPosition()[0][0] || currBlock.getPosition()[1][0] || currBlock.getPosition()[2][0] || currBlock.getPosition()[3][0])) {
         movePossible = false;
@@ -170,7 +173,8 @@ public void moveLeft(){
         currBlock.coordX--;
     }
 }
-public void moveRight(){
+
+    public void moveRight() {
     boolean movePossible = true;
     if (currBlock.coordX == 6 && (currBlock.getPosition()[0][3] || currBlock.getPosition()[1][3] || currBlock.getPosition()[2][3] || currBlock.getPosition()[3][3])) {
         movePossible = false;
