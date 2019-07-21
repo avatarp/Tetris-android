@@ -57,7 +57,7 @@ public class GameActivity extends AppCompatActivity {
 
             gameCanvas.setBitmap(gameMap);
             nextBlockCanvas.setBitmap(nextBlockMap);
-            gameCanvas.drawRect(0, 0, gameView.getWidth() - 1, gameView.getHeight() - 1, whitePaint);
+
 
 
             float bitmapWidth = gameView.getWidth();
@@ -133,6 +133,7 @@ public class GameActivity extends AppCompatActivity {
                     }
                 }
             }
+            gameCanvas.drawRect(0, 0, gameView.getWidth() - 1, gameView.getHeight() - 1, whitePaint);
             nextBlockView.setBackground(new BitmapDrawable(getApplicationContext().getResources(), nextBlockMap));
             gameView.setBackground(new BitmapDrawable(getApplicationContext().getResources(), gameMap));
             String text = valueOf(game.score);

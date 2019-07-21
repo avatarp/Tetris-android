@@ -56,20 +56,16 @@ private void generateNextBlock()
             nextBlock = new BlockO(color);
             break;
     }
-    nextBlock.coordY=0;
-    nextBlock.coordX=4;
+    nextBlock.coordY = 0;//top
+    nextBlock.coordX = 3;//middle
+
 }
 
     public boolean isColliding()
 {
-
-    int y=currBlock.coordY;
-    int x=currBlock.coordX;
-    Byte[][] temp = well.getGameGrid();
-    Boolean[][] tempPosition=currBlock.getPosition();
     for(Integer i=0;i<4;i++){
         for(Integer j =0;j<4;j++) {
-
+            //check for blocks hitting the bottom
             if (currBlock.coordY == 20 && (currBlock.getPosition()[0][0] || currBlock.getPosition()[0][1] || currBlock.getPosition()[0][2] || currBlock.getPosition()[0][3])) {
                 return true;
             } else if (currBlock.coordY == 19 && (currBlock.getPosition()[1][0] || currBlock.getPosition()[1][1] || currBlock.getPosition()[1][2] || currBlock.getPosition()[1][3])) {
@@ -80,9 +76,26 @@ private void generateNextBlock()
                 return true;
             }
 
-            if(tempPosition[i][j] && temp[y + i][x + j]>0)
-            { return true; }
 
+            //check for out of bounds
+            if (currBlock.getPosition()[i][j] == true) {
+                if (currBlock.coordX + j < 0) {
+                    return true;
+                }//outside left side
+                if (currBlock.coordX + j > 9) {
+                    return true;
+                }//outside right side
+                if (currBlock.coordY + i > 19) {
+                    return true;
+                }//outside bottom
+                if (currBlock.coordY + i < 0) {
+                    return true;
+                }//outside top
+            }
+
+            //check the grid for other blocks
+            if (currBlock.getPosition()[i][j] && well.getGameGrid()[currBlock.coordY + i][currBlock.coordX + j] > 0)
+            { return true; }
         }
     }
 
@@ -105,8 +118,6 @@ private void generateNextBlock()
         generateNextBlock();
     }
 
-    nextBlock.coordY=0; //top
-    nextBlock.coordX=4; //middle
 
     return !isColliding();
 
