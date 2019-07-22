@@ -18,6 +18,7 @@ public class Engine extends Thread {
     Integer score;
     public Grid well;
     long waitTime;
+    public Boolean isRunning = true;
 
 public Engine(){
     generateNextBlock();
@@ -79,18 +80,22 @@ private void generateNextBlock()
 
             //check for out of bounds
             if (currBlock.getPosition()[i][j] == true) {
+                //outside left side
                 if (currBlock.coordX + j < 0) {
                     return true;
-                }//outside left side
+                }
+                //outside right side
                 if (currBlock.coordX + j > 9) {
                     return true;
-                }//outside right side
+                }
+                //outside bottom
                 if (currBlock.coordY + i > 19) {
                     return true;
-                }//outside bottom
+                }
+                //outside top
                 if (currBlock.coordY + i < 0) {
                     return true;
-                }//outside top
+                }
             }
 
             //check the grid for other blocks
@@ -146,26 +151,35 @@ private void generateNextBlock()
                     e.printStackTrace();
                 }
                 while (dropDown()) {
+                    while (isRunning == false) {
+                        try {
+                            wait(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     gameActivityObj.triggerUIupdate();
-                try {
-                    wait(waitTime);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                    try {
+                        wait(waitTime);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
-            }
                 score++;
-            well.addBlock(currBlock);
-            totalBlocks++;
+                well.addBlock(currBlock);
+                totalBlocks++;
                 newScore = well.updateGrid();
                 score += newScore;
-            if (waitTime > 100) {
-                waitTime -= newScore;
-            }
+                if (waitTime > 100) {
+                    waitTime -= newScore;
+                }
                 if (waitTime < 100) {
                     waitTime = 100;
                 }
 
-        }
+            }
+            isRunning = false;
+            gameActivityObj.triggerUIupdate();
         }
     }
 

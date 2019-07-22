@@ -27,6 +27,11 @@ public class GameActivity extends AppCompatActivity {
             final TextView scoreValue = findViewById(R.id.scoreValueText);
             final View gameView = findViewById(R.id.GameSideView);
             final View nextBlockView = findViewById(R.id.nextBlockView);
+            final ImageButton pauseButton = findViewById(R.id.pauseButton);
+            if (game.isRunning)
+                pauseButton.setImageResource(R.drawable.ic_pause_white_24dp);
+            else
+                pauseButton.setImageResource(R.drawable.ic_play_arrow_white_24dp);
 
             Bitmap gameMap = Bitmap.createBitmap(gameView.getWidth(), gameView.getHeight(), Bitmap.Config.ARGB_8888);
             Canvas gameCanvas = new Canvas();
@@ -158,6 +163,7 @@ public class GameActivity extends AppCompatActivity {
         ImageButton downArrow = findViewById(R.id.dropButton);
         ImageButton rotateLeftKey = findViewById(R.id.turnLeftButton);
         ImageButton rotateRightKey = findViewById(R.id.turnRightButton);
+        final ImageButton pauseButton = findViewById(R.id.pauseButton);
 
 
         new Thread(new Runnable() {
@@ -171,11 +177,13 @@ public class GameActivity extends AppCompatActivity {
         rightArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                game.moveRight();
-                if (game.isColliding()) {
-                    game.moveLeft();
+                if (game.isRunning) {
+                    game.moveRight();
+                    if (game.isColliding()) {
+                        game.moveLeft();
+                    }
                 }
-                runOnUiThread(updateUI);
+                triggerUIupdate();
             }
 
         });
@@ -183,12 +191,13 @@ public class GameActivity extends AppCompatActivity {
         leftArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                game.moveLeft();
-                if (game.isColliding()) {
-                    game.moveRight();
+                if (game.isRunning) {
+                    game.moveLeft();
+                    if (game.isColliding()) {
+                        game.moveRight();
+                    }
                 }
-                runOnUiThread(updateUI);
+                triggerUIupdate();
             }
 
         });
@@ -196,11 +205,13 @@ public class GameActivity extends AppCompatActivity {
         rotateLeftKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                game.currBlock.rotateLeft();
-                if (game.isColliding()) {
-                    game.currBlock.rotateRight();
+                if (game.isRunning) {
+                    game.currBlock.rotateLeft();
+                    if (game.isColliding()) {
+                        game.currBlock.rotateRight();
+                    }
                 }
-                runOnUiThread(updateUI);
+                triggerUIupdate();
             }
 
         });
@@ -208,12 +219,14 @@ public class GameActivity extends AppCompatActivity {
         rotateRightKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                game.currBlock.rotateRight();
-                if (game.isColliding()) {
-                    game.currBlock.rotateLeft();
-                }
-                runOnUiThread(updateUI);
+                if (game.isRunning) {
+                    game.currBlock.rotateRight();
+                    if (game.isColliding()) {
+                        game.currBlock.rotateLeft();
+                    }
+                    triggerUIupdate();
 
+                }
             }
 
         });
@@ -221,13 +234,29 @@ public class GameActivity extends AppCompatActivity {
         downArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                game.dropDown();
-                runOnUiThread(updateUI);
+                if (game.isRunning)
+                    game.dropDown();
+                triggerUIupdate();
             }
 
 
         });
 
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (game.isRunning == true) {
+                    game.isRunning = false;
+                    triggerUIupdate();
+                } else {
+                    game.isRunning = true;
+                    triggerUIupdate();
+                }
+
+            }
+
+
+        });
     }
 
     public void triggerUIupdate() {
