@@ -7,8 +7,8 @@
 
     <ImageButton
         android:id="@+id/pauseButton"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:background="#00FFFFFF"
         app:srcCompat="@drawable/ic_pause_white_24dp" />
 

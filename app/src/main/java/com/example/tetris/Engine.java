@@ -17,7 +17,7 @@ public class Engine extends Thread {
     public Block currBlock;
     Integer score;
     public Grid well;
-    long waitTime;
+    private long waitTime;
     public Boolean isRunning = true;
 
 public Engine(){
@@ -27,6 +27,9 @@ public Engine(){
     waitTime = 1000;
 }
 
+    public void togglePause() {
+        isRunning = isRunning != true;
+    }
 private void generateNextBlock()
 {
     Random rand=new Random();
@@ -109,7 +112,7 @@ private void generateNextBlock()
 }
 
 
-    public boolean spawn()
+    private boolean spawn()
 {
     if(currBlock==null && nextBlock==null)
     {
@@ -151,8 +154,10 @@ private void generateNextBlock()
                     e.printStackTrace();
                 }
                 while (dropDown()) {
+                    boolean pauseCaught = false;
                     while (isRunning == false) {
                         try {
+                            pauseCaught = true;
                             wait(100);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
@@ -163,6 +168,13 @@ private void generateNextBlock()
                         wait(waitTime);
                     } catch (Exception ex) {
                         ex.printStackTrace();
+                    }
+                    while (isRunning == false && pauseCaught == false) {
+                        try {
+                            wait(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
                 score++;
@@ -180,6 +192,8 @@ private void generateNextBlock()
             }
             isRunning = false;
             gameActivityObj.triggerUIupdate();
+            DatabaseHandler db = new DatabaseHandler(null);
+
         }
     }
 

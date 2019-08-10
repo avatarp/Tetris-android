@@ -245,14 +245,8 @@ public class GameActivity extends AppCompatActivity {
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (game.isRunning == true) {
-                    game.isRunning = false;
-                    triggerUIupdate();
-                } else {
-                    game.isRunning = true;
-                    triggerUIupdate();
-                }
-
+                game.togglePause();
+                triggerUIupdate();
             }
 
 
@@ -264,9 +258,13 @@ public class GameActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        this.finish();
+    public void onPause() {
+        super.onPause();
+        if (game.isRunning == true) {
+            game.togglePause();
+            triggerUIupdate();
+        }
+
     }
 
 
