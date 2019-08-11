@@ -7,4 +7,5 @@
     <string name="exitTxt">Wyjście</string>
     <string name="next_block">Następny blok</string>
     <string name="score">Wynik:</string>
+    <string name="gameOver">Przegrałeś!</string>
 </resources>

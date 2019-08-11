@@ -1,5 +1,7 @@
 package com.example.tetris;
 
+import android.content.Intent;
+
 import com.example.tetris.blocks.Block;
 import com.example.tetris.blocks.BlockI;
 import com.example.tetris.blocks.BlockJ;
@@ -142,7 +144,7 @@ private void generateNextBlock()
     return true;
 }
 
-    public void runLogic(GameActivity gameActivityObj) {
+    public void runLogic(final GameActivity gameActivityObj) {
         synchronized (this) {
             Integer totalBlocks = 0;
             Integer newScore = 0;
@@ -184,15 +186,17 @@ private void generateNextBlock()
                 score += newScore;
                 if (waitTime > 100) {
                     waitTime -= newScore;
-                }
-                if (waitTime < 100) {
+                } else if (waitTime < 100) {
                     waitTime = 100;
                 }
 
             }
             isRunning = false;
             gameActivityObj.triggerUIupdate();
-            DatabaseHandler db = new DatabaseHandler(null);
+
+            Intent GameOverIntent = new Intent(gameActivityObj, GameOverActivity.class);
+            GameOverIntent.putExtra("newHighScore", score);
+            gameActivityObj.startActivity(GameOverIntent);
 
         }
     }
