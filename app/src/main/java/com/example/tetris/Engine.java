@@ -196,6 +196,7 @@ private void generateNextBlock()
 
             Intent GameOverIntent = new Intent(gameActivityObj, GameOverActivity.class);
             GameOverIntent.putExtra("newHighScore", score);
+            gameActivityObj.finish();
             gameActivityObj.startActivity(GameOverIntent);
 
         }

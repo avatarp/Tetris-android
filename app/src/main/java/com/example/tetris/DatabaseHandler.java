@@ -39,7 +39,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor c = db.rawQuery("SELECT * FROM " + HIGHSCORES_TABLE + " ORDER BY " + SCORE + " DESC LIMIT 10", null);
         if (c.moveToFirst()) {
             do {
-                highscores += c.getString(1) + ", ";//scores
+                highscores += c.getString(1) + "\n";//scores
+            } while (c.moveToNext());
+        }
+        c.close();
+        return highscores;
+    }
+
+    public String getHighscoresTimestamps() {
+        String highscores = "";
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM " + HIGHSCORES_TABLE + " ORDER BY " + SCORE + " DESC LIMIT 10", null);
+        if (c.moveToFirst()) {
+            do {
                 highscores += c.getString(2) + "\n";//timestamps
             } while (c.moveToNext());
         }

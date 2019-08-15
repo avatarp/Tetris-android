@@ -39,8 +39,11 @@ public class GameOverActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(GameOverActivity.this, "Dodanie rekordu powiodło się!", Toast.LENGTH_LONG);
             toast.show();
         }
+
         TextView highscoresView = findViewById(R.id.TopScoresText);
+        TextView timestampsTextView = findViewById(R.id.TimestampsText);
         highscoresView.setText(databaseHandler.getHighscores());
+        timestampsTextView.setText(databaseHandler.getHighscoresTimestamps());
 
 
     }
