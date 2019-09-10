@@ -1,24 +1,30 @@
 package com.example.tetris;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static java.lang.String.valueOf;
 
 
 public class GameActivity extends AppCompatActivity {
-
+    Toast backToast;
     final Engine game = new Engine();
+    private long backPressedTime = 0;
 
     final Runnable updateUI = new Runnable() {
 
@@ -242,6 +248,34 @@ public class GameActivity extends AppCompatActivity {
 
         });
 
+        downArrow.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Vibrator vi = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+// Vibrate for 500 milliseconds
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    vi.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+                } else {
+                    //deprecated in API 26
+                    vi.vibrate(50);
+                }
+
+                if (game.isRunning) {
+                    game.togglePause();
+                }
+
+                while (game.dropDown()) {
+                    //do nothing
+                }
+                if (!game.isRunning) {
+                    game.togglePause();
+                }
+
+                triggerUIupdate();
+                return true;
+            }
+        });
+
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -267,6 +301,21 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            backToast.cancel();
+            super.onBackPressed();
+            return;
+        } else {
+            String toastString = getResources().getString(R.string.toastOnExit);
+            backToast = Toast.makeText(getBaseContext(), toastString, Toast.LENGTH_SHORT);
+            backToast.show();
+        }
+
+        backPressedTime = System.currentTimeMillis();
+    }
 
 }
 

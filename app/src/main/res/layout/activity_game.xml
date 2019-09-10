@@ -5,12 +5,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_repeating">
 
-    <ImageButton
-        android:id="@+id/pauseButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="#00FFFFFF"
-        app:srcCompat="@drawable/ic_pause_white_24dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -127,4 +121,12 @@
 
 
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/pauseButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="#00FFFFFF"
+        app:srcCompat="@drawable/ic_pause_white_24dp" />
+
 </RelativeLayout>
