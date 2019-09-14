@@ -252,7 +252,6 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 Vibrator vi = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-// Vibrate for 500 milliseconds
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     vi.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
                 } else {
@@ -260,21 +259,12 @@ public class GameActivity extends AppCompatActivity {
                     vi.vibrate(50);
                 }
 
-                if (game.isRunning) {
-                    game.togglePause();
-                }
-
-                while (game.dropDown()) {
-                    //do nothing
-                }
-                if (!game.isRunning) {
-                    game.togglePause();
-                }
-
+                game.dropToBottom();
                 triggerUIupdate();
                 return true;
             }
         });
+
 
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -294,7 +284,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        if (game.isRunning == true) {
+        if (game.isRunning) {
             game.togglePause();
             triggerUIupdate();
         }

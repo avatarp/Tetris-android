@@ -30,7 +30,7 @@ public Engine(){
 }
 
     public void togglePause() {
-        isRunning = isRunning != true;
+        isRunning = !isRunning;
     }
 private void generateNextBlock()
 {
@@ -144,10 +144,28 @@ private void generateNextBlock()
     return true;
 }
 
+    public void dropToBottom() {
+        if (isRunning) {
+            togglePause();
+
+            while (true) {
+                if (dropDown()) {
+                    break;
+                }
+
+            }
+            if (!isRunning) {
+                togglePause();
+            }
+        }
+
+    }
+
+
     public void runLogic(final GameActivity gameActivityObj) {
         synchronized (this) {
             Integer totalBlocks = 0;
-            Integer newScore = 0;
+            Integer newScore;
             while (spawn()) {
                 gameActivityObj.triggerUIupdate();
                 try {
