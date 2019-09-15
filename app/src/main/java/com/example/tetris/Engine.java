@@ -149,7 +149,7 @@ private void generateNextBlock()
             togglePause();
 
             while (true) {
-                if (dropDown()) {
+                if (dropDown() == false) {
                     break;
                 }
 

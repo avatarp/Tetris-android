@@ -33,6 +33,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
+    public int getBestScore() {
+        String score;
+        int bestScore;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT SCORE FROM " + HIGHSCORES_TABLE + " ORDER BY " + SCORE + " DESC LIMIT 1", null);
+        c.moveToFirst();
+        score = c.getString(0);//scores
+
+
+        c.close();
+        bestScore = Integer.parseInt(score);
+        return bestScore;
+    }
+
     public String getHighscores() {
         String highscores = "";
         SQLiteDatabase db = getReadableDatabase();

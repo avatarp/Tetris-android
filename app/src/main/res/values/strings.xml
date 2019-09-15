@@ -6,7 +6,13 @@
     <string name="controlsTxt">Sterowanie</string>
     <string name="exitTxt">Wyjście</string>
     <string name="next_block">Następny blok</string>
-    <string name="score">Wynik:</string>
+    <string name="score">Twój wynik to:</string>
     <string name="gameOver">Przegrałeś!</string>
-    <string name="toastOnExit">Naciśnij ponownie aby wyjść...</string>
+    <string name="toastOnExit">Naciśnij ponownie aby wyjść…</string>
+    <string name="soClose">A było tak blisko!</string>
+    <string name="onlyXPointsPrefix">Tylko</string>
+    <string name="onlyXPointsPostfix">punktów do nowego rekordu!</string>
+    <string name="stats">Statystyki</string>
+    <string name="replay">Spróbuj jeszcze raz</string>
+    <string name="menu">menu główne</string>
 </resources>
