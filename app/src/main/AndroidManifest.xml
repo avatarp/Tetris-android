@@ -21,8 +21,8 @@
         <activity android:name=".Controls" />
         <activity android:name=".GameActivity" />
 
-        <uses-permission android:name="android.permission.VIBRATE" />
-    </application>
 
+    </application>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
 </manifest>

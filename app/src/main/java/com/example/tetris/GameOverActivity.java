@@ -52,7 +52,7 @@ public class GameOverActivity extends AppCompatActivity {
         timestampsTextView.setText(databaseHandler.getHighscoresTimestamps());*/
         ProgressBar progressBar = findViewById(R.id.progressBar);
         int bestScore = databaseHandler.getBestScore();
-        int progressValue = score / bestScore;
+        int progressValue = 100 * score / bestScore;
 
         db.close();
         TextView pointsLeft = findViewById(R.id.onlyXPointsText);
