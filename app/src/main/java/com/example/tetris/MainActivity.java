@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         Button newGameButton = findViewById(R.id.newGameButton);
         Button controlsButton = findViewById(R.id.controlsButton);
         Button exitButton = findViewById(R.id.exitButton);
+        Button statsButton = findViewById(R.id.statsButton);
 
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +41,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        statsButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, stats.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         newGameButton.setOnClickListener(new View.OnClickListener() {
 
