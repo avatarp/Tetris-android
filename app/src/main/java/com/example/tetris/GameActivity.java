@@ -64,7 +64,7 @@ public class GameActivity extends AppCompatActivity {
             Paint blackPaint = new Paint();
             blackPaint.setColor(Color.BLACK);
             blackPaint.setStyle(Paint.Style.STROKE);
-            blackPaint.setStrokeWidth(5);
+            blackPaint.setStrokeWidth(3);
 
             gameCanvas.setBitmap(gameMap);
             nextBlockCanvas.setBitmap(nextBlockMap);

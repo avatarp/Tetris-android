@@ -5,11 +5,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DatabaseHandler extends SQLiteOpenHelper {
 
-    public static final int DatabaseVersion = 1;
-    public static final String HIGHSCORES_TABLE = "HIGHSCORES";
-    public static final String SCORE = "SCORE";
+    private static final int DatabaseVersion = 1;
+    private static final String HIGHSCORES_TABLE = "HIGHSCORES";
+    private static final String SCORE = "SCORE";
+    private static final String SYSDATE = "SYSDATE";
     private static final String DatabaseName = "tetrisDB";
 
     DatabaseHandler(Context context) {
@@ -47,17 +51,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return bestScore;
     }
 
-    public String getHighscores() {
-        String highscores = "";
+    public Long[] getScores() {
+        String temp;
+        List<Long> scores = new ArrayList<>();
+
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM " + HIGHSCORES_TABLE + " ORDER BY " + SCORE + " DESC LIMIT 10", null);
+        Cursor c = db.rawQuery("SELECT SCORE FROM " + HIGHSCORES_TABLE + " ORDER BY " + SYSDATE + " DESC", null);
         if (c.moveToFirst()) {
             do {
-                highscores += c.getString(1) + "\n";//scores
+                temp = c.getString(0);//scores
+                scores.add(Long.parseLong(temp));
             } while (c.moveToNext());
         }
         c.close();
-        return highscores;
+        return scores.toArray(new Long[scores.size()]);
+
     }
 
     public String getHighscoresTimestamps() {
