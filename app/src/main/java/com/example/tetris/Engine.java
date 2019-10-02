@@ -21,6 +21,11 @@ public class Engine extends Thread {
     public Grid well;
     private long waitTime;
     public Boolean isRunning = true;
+    private int linesCleared;
+    private int totalBlocks;
+    private int blockRotations;
+    private int blockMoves;
+    private Byte multiplier = 1;
 
 public Engine(){
     generateNextBlock();
@@ -161,10 +166,13 @@ private void generateNextBlock()
 
     }
 
+    public int getMultiplier() {
+        return multiplier;
+    }
 
     public void runLogic(final GameActivity gameActivityObj) {
         synchronized (this) {
-            Integer totalBlocks = 0;
+
             Integer newScore;
             while (spawn()) {
                 gameActivityObj.triggerUIupdate();
@@ -201,12 +209,20 @@ private void generateNextBlock()
                 well.addBlock(currBlock);
                 totalBlocks++;
                 newScore = well.updateGrid();
-                score += newScore;
                 if (waitTime > 100) {
                     waitTime -= newScore;
                 } else if (waitTime < 100) {
                     waitTime = 100;
                 }
+                linesCleared += newScore / 10;
+                if (newScore > 0) {
+                    newScore *= multiplier;
+                    multiplier++;
+                } else {
+                    if (multiplier > 1)
+                        multiplier--;
+                }
+                score += newScore;
 
             }
             isRunning = false;
@@ -233,6 +249,7 @@ private void generateNextBlock()
     }
     if (movePossible) {
         currBlock.coordX--;
+        blockMoves++;
     }
 }
 
@@ -249,8 +266,12 @@ private void generateNextBlock()
     }
     if (movePossible) {
         currBlock.coordX++;
+        blockMoves++;
     }
 }
 
+    public void countRotation() {
+        blockRotations++;
+    }
 
 }

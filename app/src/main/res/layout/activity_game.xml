@@ -62,10 +62,28 @@
                 android:id="@+id/scoreValueText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="0"
                 android:textColor="#ffffff"
                 android:textSize="32sp"
                 android:textAlignment="center"/>
+
+            <TextView
+                android:id="@+id/multiplierTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/multiplier"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/mumultiplierValueTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="32sp" />
 
         </LinearLayout>
 

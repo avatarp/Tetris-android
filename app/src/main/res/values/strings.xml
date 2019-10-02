@@ -16,4 +16,5 @@
     <string name="replay">Spróbuj jeszcze raz</string>
     <string name="menu">menu główne</string>
     <string name="lastscores">Twoje ostatnie wyniki</string>
+    <string name="multiplier">Mnożnik:</string>
 </resources>

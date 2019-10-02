@@ -45,26 +45,12 @@ public class stats extends AppCompatActivity {
         // no description text
         chart.getDescription().setEnabled(false);
 
-        // chart.setDrawHorizontalGrid(false);
-        //
-        // enable / disable grid background
-        chart.setDrawGridBackground(false);
-//        chart.getRenderer().getGridPaint().setGridColor(Color.WHITE & 0x70FFFFFF);
-
         // enable touch gestures
         chart.setTouchEnabled(true);
-
-        // enable scaling and dragging
         chart.setDragEnabled(true);
-        chart.setScaleEnabled(true);
-
-        // if disabled, scaling can be done on x- and y-axis separately
-        chart.setPinchZoom(false);
 
         chart.setBackgroundColor(color);
 
-        // set custom chart offsets (automatic offset calculation is hereby disabled)
-        //chart.setViewPortOffsets(10, 0, 10, 0);
 
         // add data
         chart.setData(data);
@@ -76,16 +62,20 @@ public class stats extends AppCompatActivity {
         chart.getAxisLeft().setEnabled(true);
         chart.getAxisLeft().setSpaceTop(40);
         chart.getAxisLeft().setSpaceBottom(40);
-        chart.getAxisLeft().setTextSize(12f); // set the text size
-        chart.getAxisLeft().setAxisMinimum(0f); // start at zero
-        chart.getAxisLeft().setAxisMaximum(1500f); // the axis maximum is 1500
+        chart.getAxisLeft().setTextSize(12f);
+        chart.getAxisLeft().setAxisMinimum(0f);
         chart.getAxisLeft().setTextColor(Color.BLACK);
-        chart.getAxisLeft().setGranularity(1f); // interval 1
         chart.getAxisLeft().setLabelCount(5, true);
 
         chart.getAxisRight().setEnabled(false);
         chart.getXAxis().setEnabled(false);
 
+
+        MyMarkerView mv = new MyMarkerView(this, R.layout.marker_view);
+
+        // Set the marker to the chart
+        mv.setChartView(chart);
+        chart.setMarker(mv);
         // animate calls invalidate()...
         chart.animateX(2500);
     }

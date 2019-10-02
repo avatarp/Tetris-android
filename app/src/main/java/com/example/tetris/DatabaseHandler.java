@@ -11,9 +11,9 @@ import java.util.List;
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final int DatabaseVersion = 1;
-    private static final String HIGHSCORES_TABLE = "HIGHSCORES";
-    private static final String SCORE = "SCORE";
-    private static final String SYSDATE = "SYSDATE";
+    public static final String HIGHSCORES_TABLE = "HIGHSCORES";
+    public static final String SCORE = "SCORE";
+    public static final String SYSDATE = "SYSDATE";
     private static final String DatabaseName = "tetrisDB";
 
     DatabaseHandler(Context context) {
