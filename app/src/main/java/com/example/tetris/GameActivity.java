@@ -43,6 +43,7 @@ public class GameActivity extends AppCompatActivity {
             if (gameView.getHeight() > 0 || gameView.getWidth() > 0) {
                 if (gameView.getHeight() > gameView.getWidth() * 2.2) {
                     gameView.getLayoutParams().height = gameView.getWidth() * 2;
+
                 }
             }
 
