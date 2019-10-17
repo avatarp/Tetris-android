@@ -40,6 +40,12 @@ public class GameActivity extends AppCompatActivity {
             else
                 pauseButton.setImageResource(R.drawable.ic_play_arrow_white_24dp);
 
+            if (gameView.getHeight() > 0 || gameView.getWidth() > 0) {
+                if (gameView.getHeight() > gameView.getWidth() * 2.2) {
+                    gameView.getLayoutParams().height = gameView.getWidth() * 2;
+                }
+            }
+
             Bitmap gameMap = Bitmap.createBitmap(gameView.getWidth(), gameView.getHeight(), Bitmap.Config.ARGB_8888);
             Canvas gameCanvas = new Canvas();
 
