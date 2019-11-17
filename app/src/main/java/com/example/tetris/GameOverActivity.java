@@ -1,10 +1,8 @@
 package com.example.tetris;
 
 import android.animation.ObjectAnimator;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,7 +10,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class GameOverActivity extends AppCompatActivity {
@@ -29,43 +26,34 @@ public class GameOverActivity extends AppCompatActivity {
         Integer score = bundle.getInt("newHighScore");
 
         TextView ScoreValueTextView = findViewById(R.id.ScoreValue);
+        TextView topGameOverTextView = findViewById(R.id.gameOverTopText);
+        TextView bottomGameOveTextView = findViewById(R.id.gameOverBottomText);
+
         ScoreValueTextView.setText(score.toString());
 
         DatabaseHandler databaseHandler = new DatabaseHandler(this);
-        SQLiteDatabase db = databaseHandler.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(DatabaseHandler.SCORE, score);
-        long result = db.insert(DatabaseHandler.HIGHSCORES_TABLE, null, contentValues);
 
 
-        if (result == -1) {
-            Toast toast = Toast.makeText(GameOverActivity.this, "Dodanie rekordu nie powiodło się.", Toast.LENGTH_LONG);
-            toast.show();
-        } else {
-            Toast toast = Toast.makeText(GameOverActivity.this, "Dodanie rekordu powiodło się!", Toast.LENGTH_LONG);
-            toast.show();
-        }
 
-        /*TextView highscoresView = findViewById(R.id.TopScoresText);
-        TextView timestampsTextView = findViewById(R.id.TimestampsText);
-        highscoresView.setText(databaseHandler.getHighscores());
-        timestampsTextView.setText(databaseHandler.getHighscoresTimestamps());*/
         ProgressBar progressBar = findViewById(R.id.progressBar);
+
         int bestScore = databaseHandler.getBestScore();
         int progressValue = 100 * score / bestScore;
 
-        db.close();
-        TextView pointsLeft = findViewById(R.id.onlyXPointsText);
+
         if (progressValue > 100) {
             progressValue = 100;
-            pointsLeft.setText("");
+            bottomGameOveTextView.setText("");
+        } else if (score == bestScore) {
+            topGameOverTextView.setText(getResources().getString(R.string.youDidIt));
+            bottomGameOveTextView.setText(getResources().getString(R.string.newHighscore));
         } else {
             if (progressValue < 1) {
                 progressValue = 1;
             }
             int pointsToHighscore = bestScore - score;
             String temp = getResources().getString(R.string.onlyXPointsPrefix) + " " + pointsToHighscore + " " + getResources().getString(R.string.onlyXPointsPostfix);
-            pointsLeft.setText(temp);
+            bottomGameOveTextView.setText(temp);
 
         }
         ObjectAnimator.ofInt(progressBar, "progress", progressValue)
@@ -79,7 +67,7 @@ public class GameOverActivity extends AppCompatActivity {
         statsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GameOverActivity.this, stats.class);
+                Intent intent = new Intent(GameOverActivity.this, statsActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -1,6 +1,7 @@
 package com.example.tetris;
 
 import android.content.Intent;
+import android.os.Looper;
 
 import com.example.tetris.blocks.Block;
 import com.example.tetris.blocks.BlockI;
@@ -17,14 +18,16 @@ public class Engine extends Thread {
 
     public Block nextBlock;
     public Block currBlock;
-    Integer score;
+    int score;
     public Grid well;
     private long waitTime;
     public Boolean isRunning = true;
     private int linesCleared;
     private int totalBlocks;
-    private int blockRotations;
-    private int blockMoves;
+    private int rotationsLeft;
+    private int rotationsRight;
+    private int movesLeft;
+    private int movesRight;
     private Byte multiplier = 1;
 
 public Engine(){
@@ -230,6 +233,15 @@ private void generateNextBlock()
 
             Intent GameOverIntent = new Intent(gameActivityObj, GameOverActivity.class);
             GameOverIntent.putExtra("newHighScore", score);
+
+
+            DatabaseHandler databaseHandler = new DatabaseHandler(gameActivityObj);
+
+            Looper.prepare();
+            if (score > 10)
+                // databaseHandler.addScore(score);
+                databaseHandler.addScore(score, totalBlocks, movesLeft, movesRight, rotationsLeft, rotationsRight, linesCleared);
+
             gameActivityObj.finish();
             gameActivityObj.startActivity(GameOverIntent);
 
@@ -249,7 +261,7 @@ private void generateNextBlock()
     }
     if (movePossible) {
         currBlock.coordX--;
-        blockMoves++;
+        movesLeft++;
     }
 }
 
@@ -266,12 +278,15 @@ private void generateNextBlock()
     }
     if (movePossible) {
         currBlock.coordX++;
-        blockMoves++;
+        movesRight++;
     }
 }
 
-    public void countRotation() {
-        blockRotations++;
+    public void countRotationLeft() {
+        rotationsLeft++;
     }
 
+    public void countRotationRight() {
+        rotationsRight++;
+    }
 }

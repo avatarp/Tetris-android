@@ -34,7 +34,7 @@ public class GameActivity extends AppCompatActivity {
             final View gameView = findViewById(R.id.GameSideView);
             final View nextBlockView = findViewById(R.id.nextBlockView);
             final ImageButton pauseButton = findViewById(R.id.pauseButton);
-            final TextView multiplierValue = findViewById(R.id.mumultiplierValueTextView);
+            final TextView multiplierValue = findViewById(R.id.multiplierValueTextView);
             if (game.isRunning)
                 pauseButton.setImageResource(R.drawable.ic_pause_white_24dp);
             else
@@ -223,7 +223,8 @@ public class GameActivity extends AppCompatActivity {
                     game.currBlock.rotateLeft();
                     if (game.isColliding()) {
                         game.currBlock.rotateRight();
-                        game.countRotation();
+                    } else {
+                        game.countRotationLeft();
                     }
                 }
                 triggerUIupdate();
@@ -238,7 +239,8 @@ public class GameActivity extends AppCompatActivity {
                     game.currBlock.rotateRight();
                     if (game.isColliding()) {
                         game.currBlock.rotateLeft();
-                        game.countRotation();
+                    } else {
+                        game.countRotationRight();
                     }
                     triggerUIupdate();
 
