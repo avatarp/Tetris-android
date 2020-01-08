@@ -23,6 +23,8 @@ List of features ready and TODOs for future development
 To-do list:
 * Changeable game looks
 * Sharing option
+* Code refactoring
+* Online leaderboard
 
 ## Status
 Project is: _in progress_ but development is slow due to lack of time between work and college
