@@ -11,6 +11,7 @@ This game was created as a project to pass an academic subject and also to teach
 	
 ## Technologies
 Project is created using:
+* Java
 * MPAndroidChart v3.1 - https://github.com/PhilJay/MPAndroidChart
 * Local SQLite Database
 	
