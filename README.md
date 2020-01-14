@@ -5,6 +5,7 @@ Academic project of tetris for android
 * [Technologies](#technologies)
 * [Features](#features)
 * [Status](#status)
+* [Screenshots](#screenshots)
 
 ## General info
 This game was created as a project to pass an academic subject and also to teach myself how to use github. Later I put the emphasis on creating a tetris clone that suits me and could, for example, be released to the play store and not look bad at the same time.
@@ -29,3 +30,9 @@ To-do list:
 
 ## Status
 Project is: _in progress_ but development is slow due to lack of time between work and college
+
+## Screenshots
+![Main](https://raw.githubusercontent.com/avatarp/Tetris-android/master/screenshots/Screenshot_20200109-214839.png)
+![Game](https://raw.githubusercontent.com/avatarp/Tetris-android/master/screenshots/Screenshot_20200109-214845.png)
+![Game over screen](https://raw.githubusercontent.com/avatarp/Tetris-android/master/screenshots/Screenshot_20200109-175242.png)
+![Stats screen](https://raw.githubusercontent.com/avatarp/Tetris-android/master/screenshots/Screenshot_20200109-175249.png)
