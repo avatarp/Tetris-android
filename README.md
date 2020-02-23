@@ -25,7 +25,6 @@ List of features ready and TODOs for future development
 To-do list:
 * Changeable game looks
 * Sharing option
-* Code refactoring
 * Online leaderboard
 
 ## Status
