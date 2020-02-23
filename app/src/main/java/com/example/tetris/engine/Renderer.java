@@ -59,7 +59,7 @@ public class Renderer {
         blackPaint.setStrokeWidth(3);
     }
 
-    private Paint choosePaint(int color) {
+    private Paint choosePaint(Byte color) {
         Paint paint=whitePaint;
         switch (color) {
             case 1:paint=redPaint;break;
@@ -81,7 +81,7 @@ public class Renderer {
         for (int row = 0; row < gridRows; row++) {
             for (int column = 0; column < gridColumns; column++) {
 
-                color=choosePaint(game.nextBlock.getColor());
+                color=choosePaint(game.well.getGameGrid()[row][column]);
 
                 if (game.well.getGameGrid()[row][column] > 0) {
                     //draw block
@@ -108,7 +108,7 @@ public class Renderer {
                         for (int l = 0; l < 4; l++) {
                             if (game.currBlock.getPosition()[l][k]) {
                                 //if block is not empty
-                                color=choosePaint(game.nextBlock.getColor());
+                                color=choosePaint(game.currBlock.getColor());
                                 if (game.currBlock.getColor() > 0) {
                                     //draw block
                                     gameCanvas.drawRect(column * partWidth + k * partWidth,
