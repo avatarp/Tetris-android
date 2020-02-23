@@ -1,4 +1,4 @@
-package com.example.tetris;
+package com.example.tetris.activities;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.example.tetris.DatabaseHandler;
+import com.example.tetris.MyMarkerView;
+import com.example.tetris.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
@@ -30,11 +33,10 @@ public class statsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_stats);
         final Context context = this;
 
-
         chart = findViewById(R.id.chart1);
         LineData data = getData();
 
-        // add some transparency to the color with "& 0x90FFFFFF"
+
         setupChart(chart, data, color);
 
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
@@ -50,19 +52,17 @@ public class statsActivity extends AppCompatActivity {
                 TextView mr = findViewById(R.id.movesRightText);
                 TextView tl = findViewById(R.id.rotateLeftText);
                 TextView tr = findViewById(R.id.rotateRightText);
-                String[] text = db.getStatsByIndex((int) (chart.getData().getEntryCount() - h.getX()));
 
+                String[] stats = db.getStatsByIndex((int) (chart.getData().getEntryCount() - h.getX()));
 
-                ml.setText(text[2]);
-                mr.setText(text[3]);
-                tl.setText(text[4]);
-                tr.setText(text[5]);
-                score.setText(text[0]);
-                date.setText(text[7]);
-                blocks.setText(text[1]);
-                lines.setText(text[6]);
-
-
+                ml.setText(stats[2]);
+                mr.setText(stats[3]);
+                tl.setText(stats[4]);
+                tr.setText(stats[5]);
+                score.setText(stats[0]);
+                date.setText(stats[7]);
+                blocks.setText(stats[1]);
+                lines.setText(stats[6]);
             }
 
             @Override
@@ -71,7 +71,6 @@ public class statsActivity extends AppCompatActivity {
             }
         });
         Highlight highlight = new Highlight(0, 0, 0);
-        //pieChart.highlightValue(highlight); //doesn't call onValueSelected()
         chart.highlightValue(highlight, true); //call onValueSelected()
     }
 
@@ -138,7 +137,5 @@ public class statsActivity extends AppCompatActivity {
         // create a data object with the data sets
         return new LineData(set1);
     }
-
-
 
 }

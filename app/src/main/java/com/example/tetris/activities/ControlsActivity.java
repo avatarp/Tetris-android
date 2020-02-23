@@ -1,10 +1,12 @@
-package com.example.tetris;
+package com.example.tetris.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
-public class Controls extends AppCompatActivity {
+import com.example.tetris.R;
+
+public class ControlsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

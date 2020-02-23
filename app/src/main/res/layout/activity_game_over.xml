@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="5"
-    tools:context=".GameOverActivity">
+    tools:context=".activities.GameOverActivity">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/topConstraintLayout"

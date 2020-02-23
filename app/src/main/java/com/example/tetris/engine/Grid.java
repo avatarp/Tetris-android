@@ -1,13 +1,13 @@
-package com.example.tetris;
+package com.example.tetris.engine;
 
 import com.example.tetris.blocks.Block;
 
-public class Grid {
+ class Grid {
     private int GridHeight;
     private int GridWidth;
     private Byte[][] GameGrid;
 
-    public Byte[][] getGameGrid() { return GameGrid; }
+     Byte[][] getGameGrid() { return GameGrid; }
 
     Grid(){
         GridHeight=20;
@@ -20,53 +20,43 @@ public class Grid {
             }
     }
 
-    void addBlock(Block newBlock)
-    {
+    void addBlock(Block newBlock) {
         int y=newBlock.coordY;
         int x=newBlock.coordX;
 
         for(int i=0;i<4;i++){
             for(int j =0;j<4;j++) {
                if(newBlock.getPosition()[i][j]){
-
                    GameGrid[y + i][x + j] = newBlock.getColor();
                }
             }
-
         }
     }
 
-    public Integer updateGrid()
-    {
+     Integer updateGrid() {
         int score = 0;
         for (int i = 0; i < GridHeight; i++) {
 
-            boolean lvlClear = true;
-
+            boolean lineClear = true;
+            //Check for Cleared lines
             for (int j = 0; j < GridWidth; j++) {
                 if (GameGrid[i][j] == 0) {
-                    lvlClear = false;
+                    lineClear = false;
                 }
             }
 
-            if (lvlClear) {
-
+            if (lineClear) {
+                //Rewrite blocks down
                 for (int j = i; j > 0; j--) {
-                    for (int k = 0; k < GridWidth; k++) {
-                        GameGrid[j][k] = GameGrid[j - 1][k];
-
-                    }
+                    if (GridWidth >= 0)
+                        System.arraycopy(GameGrid[j - 1], 0, GameGrid[j], 0, GridWidth);
                 }
-                for (int j = 0; j < GridWidth; j++) {
-                    GameGrid[0][j] = 0;
-                }
-                i--;
+                //Clear top line
+                for (int j = 0; j < GridWidth; j++) { GameGrid[0][j] = 0; }
+                i--; //Check the same line again after rewriting blocks
                 score += 10;
-
             }
         }
-
-
         return score;
     }
 

@@ -1,4 +1,4 @@
-package com.example.tetris;
+package com.example.tetris.activities;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
@@ -10,6 +10,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.example.tetris.DatabaseHandler;
+import com.example.tetris.R;
 
 
 public class GameOverActivity extends AppCompatActivity {
@@ -33,17 +36,13 @@ public class GameOverActivity extends AppCompatActivity {
 
         DatabaseHandler databaseHandler = new DatabaseHandler(this);
 
-
-
         ProgressBar progressBar = findViewById(R.id.progressBar);
 
         int bestScore = databaseHandler.getBestScore();
         int progressValue = 100 * score / bestScore;
 
 
-        if (progressValue > 100) {
-            progressValue = 100;
-            bottomGameOveTextView.setText("");
+        if (progressValue > 100) { progressValue = 100; bottomGameOveTextView.setText("");
         } else if (score == bestScore) {
             topGameOverTextView.setText(getResources().getString(R.string.youDidIt));
             bottomGameOveTextView.setText(getResources().getString(R.string.newHighscore));
@@ -96,4 +95,3 @@ public class GameOverActivity extends AppCompatActivity {
 
 
 }
-

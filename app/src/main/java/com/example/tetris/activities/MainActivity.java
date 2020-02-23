@@ -1,4 +1,4 @@
-package com.example.tetris;
+package com.example.tetris.activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+
+import com.example.tetris.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this, Controls.class);
+                Intent intent=new Intent(MainActivity.this, ControlsActivity.class);
                 startActivity(intent);
             }
         });
@@ -50,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
 
         newGameButton.setOnClickListener(new View.OnClickListener() {
 
