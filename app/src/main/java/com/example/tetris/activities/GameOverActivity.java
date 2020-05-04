@@ -1,6 +1,7 @@
 package com.example.tetris.activities;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.example.tetris.R;
 
 public class GameOverActivity extends AppCompatActivity {
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +47,7 @@ public class GameOverActivity extends AppCompatActivity {
         if (progressValue > 100) { progressValue = 100; bottomGameOveTextView.setText("");
         } else if (score == bestScore) {
             topGameOverTextView.setText(getResources().getString(R.string.youDidIt));
-            bottomGameOveTextView.setText(getResources().getString(R.string.newHighscore));
+            bottomGameOveTextView.setText(getResources().getString(R.string.newHighScore));
         } else {
             if (progressValue < 1) {
                 progressValue = 1;

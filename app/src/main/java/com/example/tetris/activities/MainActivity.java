@@ -1,5 +1,6 @@
 package com.example.tetris.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import com.example.tetris.R;
 public class MainActivity extends AppCompatActivity {
 
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button newGameButton = findViewById(R.id.newGameButton);
-        Button controlsButton = findViewById(R.id.controlsButton);
+        Button controlsButton = findViewById(R.id.optionsButton);
         Button exitButton = findViewById(R.id.exitButton);
         Button statsButton = findViewById(R.id.statsButton);
 

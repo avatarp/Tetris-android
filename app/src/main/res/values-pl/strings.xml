@@ -1,0 +1,24 @@
+<resources>
+    <string name="credits">Napisane przez Mateusza Siedleckiego.</string>
+    <string name="newGameTxt">Nowa Gra</string>
+    <string name="controlsTxt">Sterowanie</string>
+    <string name="exitTxt">Wyjście</string>
+    <string name="next_block">Następny blok</string>
+    <string name="score">Twój wynik:</string>
+    <string name="gameOver">Przegrałeś!</string>
+    <string name="toastOnExit">Naciśnij ponownie aby wyjść…</string>
+    <string name="soClose">A było tak blisko!</string>
+    <string name="onlyXPointsPrefix">Tylko</string>
+    <string name="onlyXPointsPostfix">punktów do nowego rekordu!</string>
+    <string name="stats">Statystyki</string>
+    <string name="replay">Spróbuj jeszcze raz</string>
+    <string name="menu">menu główne</string>
+    <string name="lastScores">Twoje wyniki</string>
+    <string name="multiplier">Mnożnik:</string>
+    <string name="newHighScore">Nowy rekord!</string>
+    <string name="youDidIt">Udało ci się!</string>
+    <string name="clearedLines">Wyczyszczonych linii:</string>
+    <string name="settings">Opcje</string>
+    <string name="appbar_scrolling_view_behavior">TEST</string>
+    <string name="blocks_total">Bloków ogółem:</string>
+</resources>

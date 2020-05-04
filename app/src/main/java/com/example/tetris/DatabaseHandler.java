@@ -27,11 +27,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final String SYSDATE = "SYSDATE";
     private static final String DatabaseName = "tetrisDB";
+    private SQLiteDatabase db;
 
     public DatabaseHandler(Context context) {
+
         super(context, DatabaseName, null, DatabaseVersion);
-        SQLiteDatabase db = getReadableDatabase();
-        onCreate(db);
+        if (db == null || !db.isOpen()) {
+            db = getReadableDatabase();
+            onCreate(db);
+        }
     }
 
     @Override
@@ -48,7 +52,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 " LINESCLEARED INTEGER, " +
                 "SYSDATE DATETIME DEFAULT (datetime('now','localtime')) );" + "");
         c.close();
-        db.close();
     }
 
     @Override
@@ -65,7 +68,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 null);
 
         c.moveToFirst();
-
+        if (c.getString(0) == null) {
+            c.close();
+            db.close();
+            return 0;
+        }
         int bestScore = Integer.parseInt(c.getString(0));
         c.close();
         db.close();

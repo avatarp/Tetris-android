@@ -22,13 +22,13 @@ import java.util.ArrayList;
 
 public class statsActivity extends AppCompatActivity {
 
-    private final int color = Color.rgb(137, 230, 81);
+    private final int color = Color.rgb(76, 200, 80);
     private LineChart chart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(getResources().getString(R.string.lastscores));
+        setTitle(getResources().getString(R.string.lastScores));
 
         setContentView(R.layout.activity_stats);
         final Context context = this;
