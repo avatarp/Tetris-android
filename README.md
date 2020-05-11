@@ -21,6 +21,7 @@ List of features ready and TODOs for future development
 * Scoring system including line clears streak multiplier
 * Stats (includes fancy graph!)
 * Scaling game view optimised for 16:9 and 19.5:9 ratio screens
+* Available in English and Polish
 
 To-do list:
 * Changeable game looks
@@ -31,7 +32,8 @@ To-do list:
 Project is: _in progress_ but development is slow due to lack of time between work and college
 
 ## Screenshots
-![Main](https://raw.githubusercontent.com/avatarp/Tetris-android/master/screenshots/Screenshot_20200109-214839.png)
-![Game](https://raw.githubusercontent.com/avatarp/Tetris-android/master/screenshots/Screenshot_20200109-214845.png)
-![Game over screen](https://raw.githubusercontent.com/avatarp/Tetris-android/master/screenshots/Screenshot_20200109-175242.png)
-![Stats screen](https://raw.githubusercontent.com/avatarp/Tetris-android/master/screenshots/Screenshot_20200109-175249.png)
+![Main](https://raw.githubusercontent.com/avatarp/Tetris-android/master/screenshots/Screenshot_1.png)
+![Game](https://raw.githubusercontent.com/avatarp/Tetris-android/master/screenshots/Screenshot_2.png)
+![Stats screen](https://raw.githubusercontent.com/avatarp/Tetris-android/master/screenshots/Screenshot_3.png)
+![Game over screen](https://raw.githubusercontent.com/avatarp/Tetris-android/master/screenshots/Screenshot_4.png)
+
