@@ -29,8 +29,7 @@ To-do list:
 * Online leaderboard
 
 ## Status
-Project is: _in progress_ but development is slow due to lack of time between work and college
-
+Project is: _suspended_
 ## Screenshots
 ![Main](https://raw.githubusercontent.com/avatarp/Tetris-android/master/screenshots/Screenshot_1.png)
 ![Game](https://raw.githubusercontent.com/avatarp/Tetris-android/master/screenshots/Screenshot_2.png)
